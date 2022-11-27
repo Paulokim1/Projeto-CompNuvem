@@ -1,0 +1,13 @@
+{
+    "instances": [
+        "teste-1",
+        "teste-2",
+        "teste-3",
+        "teste-7"
+    ],
+    "security_groups": [
+        "df",
+        "security-group-1",
+        "security-group-3"
+    ]
+}

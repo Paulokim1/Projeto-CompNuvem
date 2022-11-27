@@ -46,40 +46,6 @@ resource "aws_route_table_association" "public_assoc" {
   route_table_id = aws_route_table.public_rt.id
 }
 
-########### USER ###########
-resource "aws_iam_user" "user" {
-  for_each = { for user in var.users : user.name => user }
-  name     = each.value.name
-  path = "/"
-}
-
-########### USER POLICY ###########
-# create the inline policy
-data "aws_iam_policy_document" "policy_doc" {
-  for_each = { for user in var.users : user.name => user }
-  dynamic "statement" {
-    for_each = each.value.restrictions
-    content {
-        actions   = each.value["restrictions"].actions
-        resources = each.value["restrictions"].resources
-    }
-  }
-}
-
-# create the policy
-resource "aws_iam_policy" "policy" {
-  for_each = { for user in var.users : user.name => user }
-  policy      = data.aws_iam_policy_document.policy_doc[each.value.name].json
-}
-
-
-# attach policy to user
-resource "aws_iam_user_policy_attachment" "user_policy_attachment" {
-  for_each = { for user in var.users : user.name => user }
-  user      = aws_iam_user.user[each.value.name].name
-  policy_arn = aws_iam_policy.policy[each.value.name].arn
-}
-
 ########### SECURITY GROUP ###########
 resource "aws_security_group" "app_server" {
     for_each = { for sg in var.security_groups : sg.name => sg } 

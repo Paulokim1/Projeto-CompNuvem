@@ -504,7 +504,7 @@ A configuração da sua instância ficou da seguinte maneira:
 
     if ans == "s":
         users_list.append(user_name)
-        with open(".auto.tfvars.json", 'r+') as f:
+        with open("../users/.auto.tfvars.json", 'r+') as f:
             data = json.load(f)
             data["users"].append(user_to_json)
             f.seek(0) 
@@ -512,7 +512,7 @@ A configuração da sua instância ficou da seguinte maneira:
             f.truncate()
         print("\033[1;32mUsuário sendo criado em instantes, aguarde..." + "\033[0m")
         sleep(1.5)
-        os.system("clear & terraform apply  --auto-approve")
+        os.system("clear & cd .. && cd users && terraform apply  --auto-approve")
         print("\033[1;32mUsuário criado com sucesso!" + "\033[0m")
         sleep(4)
         return
@@ -642,7 +642,7 @@ Quais dos security groups abaixo você deseja deletar?
         for instance in data["instances"]:
             if instance["sg-name"] == security_groups_list[menu_ans-1]:
                 print("\033[1;31mEste security group está sendo utilizado em uma ou mais instância(s)." + "\033[0m")
-                print("\033[1;31mDeletá-lo acarretá no enceramento desta(s) própria(s) instância(s) a seguir:\n" + "\033[0m")
+                print("\033[1;31mDeletá-lo acarretará no enceramento desta(s) própria(s) instância(s) a seguir:\n" + "\033[0m")
                 count = 1
                 for instance in data["instances"]:
                     if instance["sg-name"] == security_groups_list[menu_ans-1]:
@@ -803,7 +803,7 @@ Quais dos usuários abaixo você deseja deletar?
     ans = input("[s/n]: ")
 
     if ans == "s":
-        with open(".auto.tfvars.json", 'r+') as f:
+        with open("../users/.auto.tfvars.json", 'r+') as f:
             data = json.load(f)
             data["users"].pop(menu_ans-1)
             f.seek(0) 
@@ -816,7 +816,7 @@ Quais dos usuários abaixo você deseja deletar?
         return
     print("\033[1;32mUsuário sendo deletado em instantes, aguarde..." + "\033[0m")
     sleep(1.5)
-    os.system("clear & terraform apply  --auto-approve")
+    os.system("clear & cd .. && cd users && terraform apply  --auto-approve")
     print("\033[1;32mUsuário deletado com sucesso!" + "\033[0m")
     sleep(4)
     return
@@ -895,6 +895,9 @@ def load_var_lists():
         data = json.load(f)
         instance_list = data["instances"]
         security_groups_list = data["security_groups"]
+
+    with open("../users/users.json", 'r+') as f:
+        data = json.load(f)
         users_list = data["users"]
     return instance_list, security_groups_list, users_list
 
@@ -903,7 +906,13 @@ def update_var_lists(instance_list, security_groups_list, users_list):
     with open("all_vars_lists.json", 'w') as f:
         data = {
             "instances": instance_list,
-            "security_groups": security_groups_list, 
+            "security_groups": security_groups_list}
+        f.seek(0) 
+        json.dump(data,f, indent=4)
+        f.truncate()
+
+    with open("../users/users.json", 'w') as f:
+        data = {
             "users": users_list}
         f.seek(0) 
         json.dump(data,f, indent=4)
@@ -920,9 +929,6 @@ while RUNNING:
     else:
         show_menu()
     update_var_lists(instance_list, security_groups_list, users_list)
-
-print("\033[1;31mEncerrando a aplicação...." + "\033[0m")
-sleep(2)
     
 
 
