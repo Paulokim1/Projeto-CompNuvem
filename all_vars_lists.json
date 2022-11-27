@@ -1,0 +1,21 @@
+{
+    "instances": [
+        "teste-1",
+        "teste-2",
+        "teste-3",
+        "teste-4",
+        "teste-5",
+        "teste-6"
+    ],
+    "security_groups": [
+        "default",
+        "security-group-1",
+        "security-group-2",
+        "security-group-3",
+        "security-group-4"
+    ],
+    "users": [
+        "user-test-1",
+        "user-test-2"
+    ]
+}
