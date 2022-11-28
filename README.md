@@ -28,25 +28,3 @@ export AWS_SECRET_ACCESS_KEY=[seu_secret_key]
 python app.py
 ```
 
-## O que é possível fazer com o projeto?
-
-- Escolher a região
-
-- Criar:
-
-  - Instâncias
-  - Grupo de segurança (com mais de 1 regra)
-  - Usuários
-
-- Deletar:
-
-  - Instâncias
-  - Grupos de segurança
-  - Regras de grupos de segurança
-  - Usuários
-
-- Listar:
-  - Instâncias
-  - Grupos de segurança
-  - Usuários
-
