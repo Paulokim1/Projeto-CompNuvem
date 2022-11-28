@@ -10,17 +10,17 @@ A proposta do projeto pode ser encontrada [aqui](https://insper.github.io/comput
 
 ## Como executar o projeto?
 
-1. Definir as variáveis de ambiente locais para que o programa consiga acessar a AWS. Para isso abra o terminal e execute os comandos abaixo alterando o valor entre áspas pelos valores da sua credencial:
-
-2. Instalar dependências:
-
-- [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+1. Definir as variáveis de ambiente locais:
 
 ```bash
 export AWS_ACCESS_KEY_ID=[seu_access_key]
 export AWS_SECRET_ACCESS_KEY=[seu_secret_key]
 ```
+
+2. Instalar dependências:
+
+- [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
 3. Após a instalação das dependências, rode o comando abaixo
 
