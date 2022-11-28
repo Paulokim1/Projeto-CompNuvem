@@ -19,12 +19,11 @@ export AWS_SECRET_ACCESS_KEY=[seu_secret_key]
 
 2. Instalar dependências:
 
-- [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- [CLI do AWS](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- [CLI do Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 
 3. Após a instalação das dependências, rode o comando abaixo
 
 ```bash
 python app.py
 ```
-
